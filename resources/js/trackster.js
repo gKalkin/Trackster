@@ -6,6 +6,12 @@ $(document).ready(function() {
   $('#search-btn').click(function() {
     Trackster.searchTracksByTitle($("#search-input").val());
   });
+
+  $('#search-input').keydown(function(event) {
+    if( event.which == 13 ) {
+      Trackster.searchTracksByTitle($("#search-input").val());
+    }
+  });
 });
 
 /*
