@@ -17,7 +17,7 @@ Trackster.renderTracks = function(tracks) {
     console.log(tracks[index]);
     var track_html = '<div class="row track">' +
       '<div class="col-xs-1 col-xs-offset-1 play-btn">' +
-      '<a href="#"><i class="fa fa-play-circle-o fa-2x"></i></a></div>' +
+      '<a href="' + tracks[index].url + '"><i class="fa fa-play-circle-o fa-2x"></i></a></div>' +
       '<div class="col-xs-2 track-info">' + tracks[index].name + '</div>' +
       '<div class="col-xs-2 track-info">Test</div><div class="col-xs-2 track-info">Test</div>' +
       '<div class="col-xs-2 track-info">' +
