@@ -13,17 +13,21 @@ $(document).ready(function() {
   Append each "row" to the container in the body to display all tracks.
 */
 Trackster.renderTracks = function(tracks) {
+  $('#track-list').empty();
+
   for(var index = 0; index < tracks.length; index++) {
-    console.log(tracks[index]);
+    var track = tracks[index];
+    var albumArt = track.image[1]["#text"];
+
     var track_html = '<div class="row track">' +
       '<div class="col-xs-1 col-xs-offset-1 play-btn">' +
-      '<a href="' + tracks[index].url + '"><i class="fa fa-play-circle-o fa-2x"></i></a></div>' +
-      '<div class="col-xs-2 track-info">' + tracks[index].name + '</div>' +
-      '<div class="col-xs-2 track-info">Test</div><div class="col-xs-2 track-info">Test</div>' +
-      '<div class="col-xs-2 track-info">' +
-      '<img src="https://images-na.ssl-images-amazon.com/images/I/61wPDPwiBSL._SS500.jpg" alt="" ' +
+      '<a href="' + track.url + '"><i class="fa fa-play-circle-o fa-2x"></i></a></div>' +
+      '<div class="col-xs-4 track-info">' + track.name + '</div>' +
+      '<div class="col-xs-2 track-info">' + track.artist +
+      '</div><div class="col-xs-2 track-info">' +
+      '<img src="' + albumArt + '" alt="" ' +
       'height="64" width="64"></div>' +
-      '<div class="col-xs-2 track-info">Test</div></div>';
+      '<div class="col-xs-2 track-info">' + track.listeners + '</div></div>';
 
       $('#track-list').append(track_html)
     }
@@ -35,9 +39,9 @@ Trackster.renderTracks = function(tracks) {
 */
 Trackster.searchTracksByTitle = function(title) {
   $.ajax({
-    url: "http://ws.audioscrobbler.com/2.0/?method=track.search&track=" + title + "&api_key=" + API_Key + "&format=json",
+    url: 'https://ws.audioscrobbler.com/2.0/?method=track.search&track=' + title + '&api_key=' + API_Key + '&format=json',
     success: function(response) {
       Trackster.renderTracks(response.results.trackmatches.track);
     }
-  })
+  });
 };
